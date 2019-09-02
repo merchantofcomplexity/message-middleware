@@ -19,13 +19,13 @@ class HttpMessageServiceProvider extends ServiceProvider
 
     public function boot(Router $router): void
     {
-        $router->aliasMiddleware('http-message', MessageMiddleware::class);
+        $router->aliasMiddleware('http-message', HttpMessageMiddleware::class);
     }
 
     public function register(): void
     {
-        $this->app->bind(MessageMiddleware::class, function (Application $app) {
-            $middleware = new MessageMiddleware(
+        $this->app->bind(HttpMessageMiddleware::class, function (Application $app) {
+            $middleware = new HttpMessageMiddleware(
                 new JsonResponse(),
                 new FQCNMessageFactory()
             );
@@ -38,6 +38,6 @@ class HttpMessageServiceProvider extends ServiceProvider
 
     public function provides(): array
     {
-        return [MessageMiddleware::class];
+        return [HttpMessageMiddleware::class];
     }
 }

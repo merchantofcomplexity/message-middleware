@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use function is_array;
 
-class MessageMiddleware
+class HttpMessageMiddleware
 {
     use HasBusFactory;
 
@@ -32,10 +32,9 @@ class MessageMiddleware
 
     /**
      * @param Request $request
-     * @param Closure $next
      * @return Response
      */
-    public function __invoke(Request $request, Closure $next)
+    public function __invoke(Request $request)
     {
         $payload = $request->json()->all();
 
